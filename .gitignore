@@ -177,3 +177,6 @@ dbhub.local.toml
 
 # ----- 2026-09-04 (sync) -----
 .template/last-apply.json
+
+# ----- 2026-09-20 (sync) -----
+.template/doctrine-ledger.json

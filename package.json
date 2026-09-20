@@ -94,7 +94,11 @@
     "jira:components": "bun scripts/sync-jira-components.ts",
     "jira:url": "bun scripts/atlassian-url.ts",
     "tests:map": "bun scripts/tests-map.ts",
-    "skills:evals": "bun scripts/run-skill-evals.ts"
+    "skills:evals": "bun scripts/run-skill-evals.ts",
+    "harness:env": "bun scripts/harness-env.ts",
+    "harness:env:check": "bun scripts/harness-env.ts --check",
+    "jira:baseline": "bun scripts/check-jira-baseline.ts",
+    "worktree:provision": "bun scripts/provision-worktree.ts"
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",

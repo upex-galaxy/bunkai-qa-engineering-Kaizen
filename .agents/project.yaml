@@ -121,6 +121,15 @@ git_strategy:
     policy_verified: 2026-09-04 # YYYY-MM-DD of the last `bun run git:policy verify`. null = never reconciled against the host
     policy_source: accepted # verified | accepted | declared — every divergence is formally listed in policy.accepted_divergences
 
+# Defaults for `/orca-orchestration` fleet runs. Applies only when the user gives no
+# explicit instruction for that run ("run six", "use the small model", "codex for this
+# one" always override these). Not policy — tune freely as fleet usage grows.
+orchestration:
+  max_workers: 4 # worker cap per concurrency round
+  default_agent: claude # default CLI agent launched per worker
+  default_model: null # null = the harness default model
+  default_effort: medium # low | medium | high
+
 # Files `bun run up` must keep as THIS project's own. Read by `cli/update-boilerplate.ts`
 # at the start of every run and merged into the protected watchlist (AGENTS.md,
 # .agents/project.yaml, .mcp.json, opencode.jsonc, .codex/config.toml,
