@@ -1,43 +1,55 @@
 {
-  // OpenCode shared team config — committed to git.
-  // Secrets are NEVER stored here: every {env:VAR} placeholder is resolved
-  // from the developer's local environment (loaded from .env via `bun run opencode`,
-  // direnv, or a manually-sourced shell). See .env.example for required vars.
-  //
-  // Syntax notes (OpenCode-specific, different from Claude Code's .mcp.json):
-  //   - Env var expansion uses {env:VAR_NAME}  (NOT ${VAR})
-  //   - MCP root key is "mcp"                  (NOT "mcpServers")
-  //   - MCP env field is "environment"         (NOT "env")
-  //   - Missing env vars resolve to empty string (no hard failure) — see AGENTS.md
-  //     Critical Reminder about stopping immediately when MCP credentials fail.
   "$schema": "https://opencode.ai/config.json",
-
-  // Plugins:
-  //   - @warp-dot-dev/opencode-warp: Warp terminal integration — surfaces
-  //     OpenCode agent activity as native Warp notifications. Auto-installed
-  //     when OpenCode runs inside Warp.
-  //     Docs: https://docs.warp.dev/agent-platform/cli-agents/opencode/
-  //   - opencode-subagent-statusline: Cosmetic UX — shows the active subagent
-  //     in the OpenCode status line so you can see which agent is running at
-  //     a glance. Pure polish, no behavioral side effects.
-  "plugin": ["@warp-dot-dev/opencode-warp", "opencode-subagent-statusline"],
-
+  "agent": {
+    "gentle-orchestrator": {
+      "prompt": "\u003c!-- gentle-ai:agent-routing --\u003e\n## Implementation Routing\n\nFirst establish whether the requested outcome explicitly authorizes a change. Investigation, explanation, review, audit, comparison, and solution-proposal or planning-only requests are read-only unless the user explicitly requests implementation or another mutation.\n- Read-only work may inspect, explain, compare, and recommend, but must not write or edit files, delegate a writer, invoke apply, or create implementation artifacts.\n- If change intent is ambiguous or conditional, ask one clarification and remain read-only until answered.\n\nAfter explicit change intent is established, route work for the requested outcome with the smallest useful topology. Every authorized change takes exactly one implementation route: direct inline, delegated direct, or optional SDD.\n\n- **Direct inline:** decide or verify from 1–3 files inline. Keep one mechanical, already-understood file change inline only when it needs no research and has no unresolved design decision.\n- **Delegated direct:** delegate one narrow exploration when understanding needs 4+ files; delegate one writer for 2+ non-trivial files. Reading that prepares a write and broad research also delegate.\n- **Optional SDD:** propose SDD only when durable proposal, spec, design, and tasks would materially reduce substantial ambiguity. SDD is selected only by an explicit request or an accepted proposal.\n- File count, changed lines, size, or perceived risk alone never selects SDD and never forces a heavier route.\n- Automatic SDD pace is not mutation authorization; once implementation is explicitly authorized, it continues under the selected route.\n- These are implementation routes, not a ban on per-action delegation. Tests, builds, installs, and review actors may still use fresh workers without changing the selected route.\n- Direct and delegated work never create SDD artifacts, prompts, phase attempts, or synthetic SDD runs.\n\n### Receipt-driven development is user-owned\n\nThe user controls receipt-driven development with a switch: `gentle-ai review mode enable|disable|status`.\n\n- It is **opt-in and off by default**. Until the user explicitly enables it, reviews do not run and delivery follows ordinary repository policy. Do not treat that as a fault to diagnose or work around.\n- `status` is read-only. It reports the deciding source and the effective mode, and changes nothing. A `default` deciding source means nobody has chosen, so the effective mode is off.\n- When the user asks to stop using receipt-driven development, run `disable`. Do not argue, do not work around it, and do not propose alternatives first.\n- While it is disabled, keep implementing organically through direct inline, delegated direct, or optional SDD: do not start reviews, do not retry, do not reactivate it, and do not fall back to any retired path.\n- Delivery under a disabled switch follows ordinary repository policy and reports `disabled/unmanaged`, never a fabricated approval.\n- Never enable receipt-driven development on the user's behalf unless the user explicitly asks for it.\n\u003c!-- /gentle-ai:agent-routing --\u003e\n"
+    }
+  },
   "mcp": {
     "context7": {
-      "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp@4.0.3"],
-      "enabled": true
-    },
-    "tavily": {
-      "type": "remote",
-      "url": "https://mcp.tavily.com/mcp/",
+      "command": [
+        "bunx",
+        "-y",
+        "@upstash/context7-mcp@4.0.3"
+      ],
       "enabled": true,
-      "headers": {
-        "Authorization": "Bearer {env:TAVILY_API_KEY}"
-      }
+      "type": "local"
+    },
+    "dbhub": {
+      "command": [
+        "bunx",
+        "-y",
+        "@bytebase/dbhub@1.2.1",
+        "--config",
+        "dbhub.toml"
+      ],
+      "enabled": true,
+      "environment": {
+        "DBHUB_DATABASE": "{env:DBHUB_DATABASE}",
+        "DBHUB_HOST": "{env:DBHUB_HOST}",
+        "DBHUB_PASSWORD": "{env:DBHUB_PASSWORD}",
+        "DBHUB_PORT": "{env:DBHUB_PORT}",
+        "DBHUB_TYPE": "{env:DBHUB_TYPE}",
+        "DBHUB_USER": "{env:DBHUB_USER}"
+      },
+      "type": "local"
+    },
+    "openapi": {
+      "command": [
+        "bunx",
+        "-y",
+        "@ivotoby/openapi-mcp-server@1.16.1",
+        "--tools",
+        "dynamic"
+      ],
+      "enabled": true,
+      "environment": {
+        "API_BASE_URL": "{env:API_BASE_URL}",
+        "OPENAPI_SPEC_PATH": "{env:OPENAPI_SPEC_PATH}"
+      },
+      "type": "local"
     },
     "playwright": {
-      "type": "local",
       "command": [
         "bunx",
         "@playwright/mcp@0.0.79",
@@ -50,99 +62,82 @@
         "--viewport-size",
         "1920x1080"
       ],
-      "enabled": true
-    },
-    "dbhub": {
-      "type": "local",
-      "command": ["bunx", "-y", "@bytebase/dbhub@1.2.1", "--config", "dbhub.toml"],
-      "enabled": true
-    },
-    // SCHEMA-READ-ONLY: no API_TOKEN / Authorization header is injected here.
-    // The OpenAPI MCP is used ONLY to discover endpoints + read schemas
-    // (list-api-endpoints, get-api-endpoint-schema). Authenticated requests are
-    // executed with curl (token from `bun run api:login` → .auth/tokens.env).
-    // Keeping credentials out of the MCP also removes the spawn-time restart
-    // requirement for API auth. OPENAPI_SPEC_PATH may be a local file OR a URL.
-    "openapi": {
-      "type": "local",
-      "command": ["bunx", "-y", "@ivotoby/openapi-mcp-server@1.16.1", "--tools", "dynamic"],
       "enabled": true,
-      "environment": {
-        "API_BASE_URL": "{env:API_BASE_URL}",
-        "OPENAPI_SPEC_PATH": "{env:OPENAPI_SPEC_PATH}"
-      }
+      "type": "local"
     },
     "postman": {
-      "type": "remote",
-      "url": "https://mcp.postman.com/mcp",
       "enabled": true,
       "headers": {
         "Authorization": "Bearer {env:POSTMAN_API_KEY}"
-      }
+      },
+      "type": "remote",
+      "url": "https://mcp.postman.com/mcp"
+    },
+    "tavily": {
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:TAVILY_API_KEY}"
+      },
+      "type": "remote",
+      "url": "https://mcp.tavily.com/mcp/"
     }
   },
-
-  // Permissions — mirrors .claude/settings.json 1:1.
-  // Rule precedence: last matching pattern wins, so deny entries are placed
-  // AFTER the broad allows they override (e.g. `git *` allow, then
-  // `git push --force *` deny — the deny wins for force-pushes).
   "permission": {
-    "edit": "allow",
-    "webfetch": "allow",
-    "websearch": "allow",
     "bash": {
       "*": "ask",
-
+      "acli *": "allow",
+      "allure *": "allow",
+      "awk *": "allow",
       "bun *": "allow",
       "bunx *": "allow",
-      "npm *": "allow",
-      "npx *": "allow",
-      "pnpm *": "allow",
-      "yarn *": "allow",
-      "node *": "allow",
-
-      "git *": "allow",
-      "gh *": "allow",
-
-      "ls *": "allow",
       "cat *": "allow",
-      "echo *": "allow",
-      "tree *": "allow",
-      "test *": "allow",
-      "mkdir *": "allow",
-      "touch *": "allow",
+      "chmod 777 *": "deny",
       "cp *": "allow",
-      "mv *": "allow",
-      "find *": "allow",
-      "grep *": "allow",
-      "rg *": "allow",
-      "sed *": "allow",
-      "awk *": "allow",
-      "head *": "allow",
-      "tail *": "allow",
-      "wc *": "allow",
-      "diff *": "allow",
-      "jq *": "allow",
       "curl *": "allow",
-
-      "playwright *": "allow",
-      "allure *": "allow",
-      "acli *": "allow",
-
-      "rm -rf *": "deny",
-      "wget *": "deny",
-      "sudo rm *": "deny",
-      "sudo *": "deny",
+      "dd if=*": "deny",
+      "diff *": "allow",
+      "echo *": "allow",
+      "find *": "allow",
+      "gh *": "allow",
+      "git *": "allow",
+      "git branch -D *": "deny",
+      "git clean -fd *": "deny",
       "git push --force *": "deny",
       "git push -f *": "deny",
       "git reset --hard *": "deny",
-      "git clean -fd *": "deny",
-      "git branch -D *": "deny",
-      "chmod 777 *": "deny",
-      "truncate *": "deny",
+      "grep *": "allow",
+      "head *": "allow",
+      "jq *": "allow",
+      "ls *": "allow",
+      "mkdir *": "allow",
+      "mkfs*": "deny",
+      "mv *": "allow",
+      "node *": "allow",
+      "npm *": "allow",
+      "npx *": "allow",
+      "playwright *": "allow",
+      "pnpm *": "allow",
+      "rg *": "allow",
+      "rm -rf *": "deny",
+      "sed *": "allow",
       "shred *": "deny",
-      "dd if=*": "deny",
-      "mkfs*": "deny"
-    }
-  }
+      "sudo *": "deny",
+      "sudo rm *": "deny",
+      "tail *": "allow",
+      "test *": "allow",
+      "touch *": "allow",
+      "tree *": "allow",
+      "truncate *": "deny",
+      "wc *": "allow",
+      "wget *": "deny",
+      "yarn *": "allow"
+    },
+    "edit": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "plugin": [
+    "@warp-dot-dev/opencode-warp",
+    "opencode-subagent-statusline"
+  ]
 }

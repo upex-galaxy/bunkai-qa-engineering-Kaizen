@@ -30,6 +30,7 @@ issue_tracker:
 testing:
   default_env: staging # Default testing environment — must match a key under `environments:` (e.g. staging)
   tms_cli: bun xray # Test management CLI command (e.g. bun xray)
+  tc_creation_stage: auto # Which stage creates Test work items — see sprint-testing/SKILL.md §"Which stage creates the TCs"
 
 qa:
   formal_blocked_gate: true # When true and the substrate exposes a `blocked` story status, FAILED stories dispatch `defect_reported` (in_test -> blocked). When false (or no `blocked` slug), the skill leaves the story in `in_test` with the linked bug — non-strict fallback. See sprint-testing/references/sprint-orchestration.md Briefing 4 Step 5.
@@ -64,23 +65,12 @@ environments:
     web_url: 'http://localhost:3000' # Frontend URL for local env (e.g. http://localhost:3000)
     api_url: 'http://localhost:3000/api' # API base URL for local env (e.g. http://localhost:3000/api)
     db_mcp: local-dbhub # MCP server name for local DB (e.g. myproject-local-db)
-    api_mcp: local-openapi # MCP server name for local API (e.g. myproject-local-api)
+    api_mcp: local-claude # MCP server name for local API (e.g. myproject-local-api)
   staging:
     web_url: 'https://staging-upexbunkai.vercel.app' # Frontend URL for staging env (e.g. https://staging.myproject.com)
     api_url: 'https://staging-upexbunkai.vercel.app/api' # API base URL for staging env (e.g. https://api-staging.myproject.com)
     db_mcp: staging-dbhub # MCP server name for staging DB (e.g. myproject-staging-db)
-    api_mcp: staging-openapi # MCP server name for staging API (e.g. myproject-staging-api)
-  qa:
-    web_url: null # TODO: Frontend URL for qa env (e.g. https://qa.myproject.com) — not provisioned yet, see AGENTS.md §13
-    api_url: null # TODO: API base URL for qa env (e.g. https://api-qa.myproject.com)
-    db_mcp: null # TODO: MCP server name for qa DB (e.g. myproject-qa-db)
-    api_mcp: null # TODO: MCP server name for qa API (e.g. myproject-qa-api)
-
-# Git workflow for THIS project — the SOURCE OF TRUTH read by the git-flow-master skill
-# before any git/gh operation. Ships `null` (template): on the first git intent git-flow-master
-# OFFERS "Strategy Setup" and fills these fields (it never auto-picks). Tracked + frozen by the
-# updater (bootstrapOnly), so each project keeps its own. Filled by git-flow-master, NOT by
-# `agents:setup`. These leaves are read directly (not {{VAR}} template vars) → skipped by vars:check.
+    api_mcp: staging-claude # MCP server name for staging API (e.g. myproject-staging-api)
 git_strategy:
   strategy: sdet # null until Strategy Setup runs; then one of: solo-main | main-integration | enterprise | trunk-based | gitflow | github-flow | gitlab-flow | sdet
   description: >
