@@ -1,8 +1,8 @@
+import { afterEach, describe, expect, test } from 'bun:test';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
 
-import { afterEach, describe, expect, test } from 'bun:test';
+import { join } from 'node:path';
 
 import { validateComponentRegistry } from './lib/updater-core.ts';
 import { COMPONENTS, GATE_SCRIPTS, gatesSummaryLine, parseArgs, resolveProtectedWatchlist, runGate, summarizeGates } from './update-boilerplate.ts';

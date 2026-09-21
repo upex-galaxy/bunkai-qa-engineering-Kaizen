@@ -8,11 +8,11 @@
  * `bunx skills add` output).
  */
 
+import { afterEach, describe, expect, test } from 'bun:test';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
 
-import { afterEach, describe, expect, test } from 'bun:test';
+import { dirname, join, resolve } from 'node:path';
 
 const LINT_SCRIPT = resolve(import.meta.dir, 'lint-skills.ts');
 const temporaryRoots: string[] = [];

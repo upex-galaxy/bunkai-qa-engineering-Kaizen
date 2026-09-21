@@ -1,10 +1,10 @@
 import type { ParityFinding, ParityInput, ParityMeta } from './updater-parity.ts';
+import { afterEach, describe, expect, test } from 'bun:test';
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+
 import { tmpdir } from 'node:os';
 
 import { dirname, join } from 'node:path';
-
-import { afterEach, describe, expect, test } from 'bun:test';
 import {
   ABORTED_OUTRO,
   archivedSkillsToReport,

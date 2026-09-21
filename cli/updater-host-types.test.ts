@@ -9,12 +9,12 @@
  * tsconfig outside the repo, so the regression cannot come back unnoticed.
  */
 
+import { afterAll, describe, expect, test } from 'bun:test';
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
 
-import { afterAll, describe, expect, test } from 'bun:test';
+import { join, resolve } from 'node:path';
 
 const REPO_ROOT = resolve(import.meta.dir, '..');
 const TSC = join(REPO_ROOT, 'node_modules', '.bin', process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
