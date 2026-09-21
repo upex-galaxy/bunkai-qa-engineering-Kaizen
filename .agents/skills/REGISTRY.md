@@ -1,6 +1,6 @@
 # Skill Registry (auto-generated)
 
-> Generated: `2026-09-02T00:29:43.805Z`
+> Generated: `2026-09-21T01:14:30.270Z`
 > Generator: `bun scripts/build-skill-registry.ts`
 > Protocol: `.agents/skills/agentic-qa-core/references/skill-resolver.md`
 
@@ -35,7 +35,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/acli/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\acli\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -49,7 +49,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/adapt-framework/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\adapt-framework\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -71,7 +71,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: you need the full table of hosted references and who cites each one, the deck-hosting details, or the exact `## Dependencies` block shape to add to a skill.
 
-> Source: `.agents/skills/agentic-qa-core/SKILL.md` · phase: `unknown` · extraction strategy: A
+> Source: `.agents\skills\agentic-qa-core\SKILL.md` · phase: `unknown` · extraction strategy: A
 
 ---
 
@@ -99,7 +99,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/agentic-qa-onboard/SKILL.md` · phase: `bootstrap` · extraction strategy: B
+> Source: `.agents\skills\agentic-qa-onboard\SKILL.md` · phase: `bootstrap` · extraction strategy: B
 
 ---
 
@@ -127,7 +127,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/bug-screenshot-annotation/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\bug-screenshot-annotation\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -155,7 +155,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/framework-development/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\framework-development\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -183,7 +183,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/git-flow-master/SKILL.md` · phase: `implementation` · extraction strategy: B
+> Source: `.agents\skills\git-flow-master\SKILL.md` · phase: `implementation` · extraction strategy: B
 
 ---
 
@@ -206,7 +206,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the mode is ambiguous, a dry-run diff or migration audit looks wrong, or you need the selected reference's step-by-step phases and verification list.
 
-> Source: `.agents/skills/jira-administration/SKILL.md` · phase: `unknown` · extraction strategy: A
+> Source: `.agents\skills\jira-administration\SKILL.md` · phase: `unknown` · extraction strategy: A
 
 ---
 
@@ -234,7 +234,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/judgment-day/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\judgment-day\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -253,7 +253,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/playwright-best-practices/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\playwright-best-practices\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -277,7 +277,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/playwright-cli/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\playwright-cli\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -305,7 +305,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/pr-review-lead/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\pr-review-lead\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -326,7 +326,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the requested mode is ambiguous, a `refresh-all` chain fails mid-sequence, or you need the selected reference's own analysis steps and validation gate.
 
-> Source: `.agents/skills/project-context/SKILL.md` · phase: `unknown` · extraction strategy: A
+> Source: `.agents\skills\project-context\SKILL.md` · phase: `unknown` · extraction strategy: A
 
 ---
 
@@ -354,7 +354,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/project-discovery/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\project-discovery\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -382,7 +382,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/regression-testing/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\regression-testing\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -410,7 +410,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/resend-cli/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\resend-cli\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -432,7 +432,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: running the batch grooming pipeline, writing the per-Story `shift-left-refinement.md`, or handling the PO/Dev handoff.
 
-> Source: `.agents/skills/shift-left-testing/SKILL.md` · phase: `unknown` · extraction strategy: A
+> Source: `.agents\skills\shift-left-testing\SKILL.md` · phase: `unknown` · extraction strategy: A
 
 ---
 
@@ -471,7 +471,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: starting a sprint cold, resuming a session, or handling a bug-triage / sprint-wide flow not covered by the rules above.
 
-> Source: `.agents/skills/sprint-testing/SKILL.md` · phase: `unknown` · source: frontmatter `compact_rules` (verbatim)
+> Source: `.agents\skills\sprint-testing\SKILL.md` · phase: `unknown` · source: frontmatter `compact_rules` (verbatim)
 
 ---
 
@@ -487,7 +487,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/sync-ai-context/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\sync-ai-context\SKILL.md` · phase: `unknown` · extraction strategy: B
 
 ---
 
@@ -509,7 +509,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: writing KATA component code, choosing fixtures for a hybrid flow, or applying the Phase 3 review checklist.
 
-> Source: `.agents/skills/test-automation/SKILL.md` · phase: `unknown` · extraction strategy: A
+> Source: `.agents\skills\test-automation\SKILL.md` · phase: `unknown` · extraction strategy: A
 
 ---
 
@@ -536,7 +536,7 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: resolving TMS modality, computing ROI, writing Gherkin, or wiring US-ATP-ATR-TC traceability links.
 
-> Source: `.agents/skills/test-documentation/SKILL.md` · phase: `unknown` · source: frontmatter `compact_rules` (verbatim)
+> Source: `.agents\skills\test-documentation\SKILL.md` · phase: `unknown` · source: frontmatter `compact_rules` (verbatim)
 
 ---
 
@@ -564,4 +564,4 @@ Skills indexed: 22
 
 **Read full SKILL.md when**: the compact rules above are insufficient (e.g. novel scenario, debugging, or the briefing tells you to load the full skill).
 
-> Source: `.agents/skills/xray-cli/SKILL.md` · phase: `unknown` · extraction strategy: B
+> Source: `.agents\skills\xray-cli\SKILL.md` · phase: `unknown` · extraction strategy: B
