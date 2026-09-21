@@ -1,10 +1,10 @@
 import type { ReportSink } from './lib/updater-types.ts';
+import { afterEach, describe, expect, test } from 'bun:test';
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+
 import { tmpdir } from 'node:os';
 
 import { dirname, join, resolve } from 'node:path';
-
-import { afterEach, describe, expect, test } from 'bun:test';
 
 import { diagnoseAgentCompatibility } from './doctor.ts';
 import {

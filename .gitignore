@@ -162,6 +162,7 @@ dbhub.local.toml
 .backups*/
 .context/PBI/*
 !.context/PBI/README.md
+!.context/PBI/ACCESS.md
 !.context/PBI/templates/
 !.context/PBI/epics/
 .context/PBI/epics/*

@@ -1,10 +1,10 @@
+import { afterEach, describe, expect, test } from 'bun:test';
 import { spawnSync } from 'node:child_process';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+
 import { tmpdir } from 'node:os';
 
 import { dirname, join } from 'node:path';
-
-import { afterEach, describe, expect, test } from 'bun:test';
 
 import { isInside } from './lib/agent-compatibility.ts';
 import { dirtyTreeExemptions, foreignDirtyPaths, isWithinWriteSurface } from './lib/updater-core.ts';

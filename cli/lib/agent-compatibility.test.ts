@@ -1,9 +1,9 @@
 /* eslint-disable no-template-curly-in-string -- the fixtures below mirror .mcp.json verbatim, `${VAR}` included */
+import { afterEach, describe, expect, test } from 'bun:test';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
 
-import { afterEach, describe, expect, test } from 'bun:test';
+import { dirname, join, resolve } from 'node:path';
 
 import { PERSONALITY_CONTRACT } from '../../.agents/hooks/personality-reinject.mjs';
 import { PersonalityReinject } from '../../.opencode/plugins/personality-reinject.js';

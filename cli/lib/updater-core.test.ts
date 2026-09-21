@@ -1,11 +1,11 @@
 import type { Component, SyncStateV6, SyncStateV7 } from './updater-types.ts';
+import { afterEach, describe, expect, test } from 'bun:test';
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+
 import { tmpdir } from 'node:os';
 
 import { dirname, join } from 'node:path';
-
-import { afterEach, describe, expect, test } from 'bun:test';
 import {
   classifyFile,
   componentOwnedPaths,
